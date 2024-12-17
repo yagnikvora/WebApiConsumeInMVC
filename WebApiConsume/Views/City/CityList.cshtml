@@ -1,0 +1,83 @@
+﻿@using WebApiConsume.Helper
+@model IEnumerable<WebApiConsume.Models.CityModel>
+
+<div class="row">
+
+    <h2 class="col-7">City List</h2>
+    @{
+        if (@TempData["Notification"] != null)
+        {
+            <p id="myElement" class="col text-danger bg-danger-subtle p-2 rounded">@TempData["Notification"]</p>
+        }
+        if (@TempData["Message"] != null)
+        {
+            <p id="myElement" class="col text-warning bg-warning-subtle p-2 rounded">@TempData["Message"]</p>
+        }
+    }
+</div>
+<hr />
+<a class="btn btn-info" asp-controller="City" asp-action="AddEditCity">Add City</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>City ID</th>
+            <th>City Name</th>
+            <th>Taluka Name</th>
+            <th>District Name</th>
+            <th>State Name</th>
+            <th>Country Name</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var city in Model)
+            {
+                <tr>
+                    <td>@city.CityID</td>
+                    <td>@city.CityName</td>
+                    <td>@city.TalukaName</td>
+                    <td>@city.DistrictName</td>
+                    <td>@city.StateName</td>
+                    <td>@city.CountryName</td>
+                    <td>
+                        <a asp-controller="City" asp-action="AddEditCity" asp-route-id="@UrlEncryptor.Encrypt(city.CityID.ToString())">
+                            <button type="submit" class="btn btn-warning">
+                                Edit
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="City" asp-action="CityDelete">
+                            <input type="hidden" name="CityID" value="@UrlEncryptor.Encrypt(city.CityID.ToString())" />
+                            <button onclick=" return confirm('Sure!! Are you want to delete @city.CityName')" type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<script>
+    var element = document.getElementById("myElement");
+
+    element.style.display = "block";
+
+    setTimeout(() => {
+        element.style.display = "none";
+    }, 3500);
+</script>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#citySearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#cityTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+}

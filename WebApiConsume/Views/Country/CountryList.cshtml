@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebApiConsume.Models.CountryModel>
+
+<div class="row">
+    <h2 class="col-7">Country List</h2>
+</div>
+<hr />
+<a class="btn btn-info" asp-controller="Country" asp-action="CountryGet">Add Country</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Country ID</th>
+            <th>Country Name</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var city in Model)
+            {
+                <tr>
+                    <td>@city.CountryID</td>
+                    <td>@city.CountryName</td>
+                    <td>
+                        <a asp-controller="Country" asp-action="AddEditCountry" asp-route-id="@city.CountryID">
+                            <button type="submit" class="btn btn-warning">
+                                Edit
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-controller="Country" asp-action="CountryDelete">
+                            <input type="hidden" name="CountryID" value="@city.CountryID" />
+                            <button onclick=" return confirm('Sure!! Are you want to delete @city.CountryName')" type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
