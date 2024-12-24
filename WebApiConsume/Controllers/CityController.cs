@@ -23,10 +23,10 @@ namespace WebApiConsume.Controllers
         #endregion
         
         #region CityList
-        public IActionResult CityList()
+        public IActionResult CityList(int? id)
         {
             List<CityModel> cities = new List<CityModel>();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/City/GetAllCitis").Result;
+            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/City/GetAllCitis/{id ?? -1}").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
@@ -68,13 +68,10 @@ namespace WebApiConsume.Controllers
                         CityName = cities[0].CityName,
                         CountryID = cities[0].CountryID,
                         StateID = cities[0].StateID,
-                        DistrictID = cities[0].DistrictID, 
-                        TalukaID = cities[0].TalukaID,
+                        CityCode = cities[0].CityCode
                     };
                     
                     ViewBag.StateList = GetStateByCountryID(cityModel.CountryID);
-                    ViewBag.DistrictList = GetDistrictByStateID(cityModel.StateID);
-                    ViewBag.TalukaList = GetTalukaByDistrictID(cityModel.DistrictID);
                     return View(cityModel);
                 }
                 else
@@ -191,58 +188,5 @@ namespace WebApiConsume.Controllers
         }
         #endregion
 
-        #region GetDistrictsByState
-        // AJAX handler for loading states dynamically
-        [HttpPost]
-        public JsonResult GetDistrictsByState(int StateID)
-        {
-            List<DistrictDropDownModel> loc_District = GetDistrictByStateID(StateID); // Fetch states
-            return Json(loc_District); // Return JSON response
-        }
-        #endregion
-
-        #region GetDistrictByStateID
-        // Helper method to fetch states by country ID
-        public List<DistrictDropDownModel> GetDistrictByStateID(int StateID)
-        {
-            List<DistrictDropDownModel> districts = new List<DistrictDropDownModel>();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/District/DistrictsDropDownByStateID/{StateID}").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                dynamic jsonobject = JsonConvert.DeserializeObject(data);
-                var extData = JsonConvert.SerializeObject(jsonobject);
-                districts = JsonConvert.DeserializeObject<List<DistrictDropDownModel>>(extData);
-            }
-            return districts;
-        }
-        #endregion
-
-        #region GetTalukasByDistrict
-        // AJAX handler for loading states dynamically
-        [HttpPost]
-        public JsonResult GetTalukasByDistrict(int DistrictID)
-        {
-            List<TalukaDropDownModel> loc_Taluka = GetTalukaByDistrictID(DistrictID); // Fetch states
-            return Json(loc_Taluka); // Return JSON response
-        }
-        #endregion
-
-        #region GetTalukaByDistrictID
-        // Helper method to fetch states by country ID
-        public List<TalukaDropDownModel> GetTalukaByDistrictID(int DistrictID)
-        {
-            List<TalukaDropDownModel> talukas = new List<TalukaDropDownModel>();
-            HttpResponseMessage response = _client.GetAsync($"{_client.BaseAddress}/Taluka/TalukasDropDownByDistrictID/{DistrictID}").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string data = response.Content.ReadAsStringAsync().Result;
-                dynamic jsonobject = JsonConvert.DeserializeObject(data);
-                var extData = JsonConvert.SerializeObject(jsonobject);
-                talukas = JsonConvert.DeserializeObject<List<TalukaDropDownModel>>(extData);
-            }
-            return talukas;
-        }
-        #endregion
     }
 }

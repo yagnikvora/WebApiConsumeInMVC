@@ -31,3 +31,4 @@ Y:\SEM-6\Advance .NET\Projects\WebApiConsume\WebApiConsume\obj\Debug\net8.0\ref\
 Y:\SEM-6\Advance .NET\Projects\WebApiConsume\WebApiConsume\bin\Debug\net8.0\Newtonsoft.Json.dll
 Y:\SEM-6\Advance .NET\Projects\WebApiConsume\WebApiConsume\obj\Debug\net8.0\WebApiConsume.csproj.AssemblyReference.cache
 Y:\SEM-6\Advance .NET\Projects\WebApiConsume\WebApiConsume\obj\Debug\net8.0\WebApiCo.DA6E0372.Up2Date
+Y:\SEM-6\Advance .NET\Projects\WebApiConsume\WebApiConsume\obj\Debug\net8.0\WebApiConsume.sourcelink.json

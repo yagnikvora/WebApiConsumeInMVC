@@ -1,15 +1,28 @@
-﻿@model IEnumerable<WebApiConsume.Models.CountryModel>
+﻿@using WebApiConsume.Helper
+@model IEnumerable<WebApiConsume.Models.CountryModel>
 
 <div class="row">
-    <h2 class="col-7">Country List</h2>
+
+    <h2 class="col-7">City List</h2>
+    @{
+        if (@TempData["Notification"] != null)
+        {
+            <p id="myElement" class="col text-danger bg-danger-subtle p-2 rounded">@TempData["Notification"]</p>
+        }
+        if (@TempData["Message"] != null)
+        {
+            <p id="myElement" class="col text-warning bg-warning-subtle p-2 rounded">@TempData["Message"]</p>
+        }
+    }
 </div>
 <hr />
-<a class="btn btn-info" asp-controller="Country" asp-action="CountryGet">Add Country</a>
+<a class="btn btn-info" asp-controller="Country" asp-action="AddEditCountry">Add Country</a>
 <table class="table">
     <thead>
         <tr>
             <th>Country ID</th>
             <th>Country Name</th>
+            <th>Country Code</th>
             <th colspan="2">Actions</th>
         </tr>
     </thead>
@@ -20,8 +33,9 @@
                 <tr>
                     <td>@city.CountryID</td>
                     <td>@city.CountryName</td>
+                    <td>@city.CountryCode</td>
                     <td>
-                        <a asp-controller="Country" asp-action="AddEditCountry" asp-route-id="@city.CountryID">
+                        <a asp-controller="Country" asp-action="AddEditCountry" asp-route-id="@UrlEncryptor.Encrypt(city.CountryID.ToString())">
                             <button type="submit" class="btn btn-warning">
                                 Edit
                             </button>
@@ -29,7 +43,7 @@
                     </td>
                     <td>
                         <form method="post" asp-controller="Country" asp-action="CountryDelete">
-                            <input type="hidden" name="CountryID" value="@city.CountryID" />
+                            <input type="hidden" name="CountryID" value="@UrlEncryptor.Encrypt(city.CountryID.ToString())" />
                             <button onclick=" return confirm('Sure!! Are you want to delete @city.CountryName')" type="submit" class="btn btn-danger">
                                 Delete
                             </button>

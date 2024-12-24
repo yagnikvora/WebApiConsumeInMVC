@@ -26,6 +26,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0eVxDaXR5TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/Country/AddEditCountry.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291bnRyeVxBZGRFZGl0Q291bnRyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/Country/CountryList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291bnRyeVxDb3VudHJ5TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,16 +42,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/Product/ProductList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0TGlzdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/State/AddEditState.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdGVcQWRkRWRpdFN0YXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/State/StateList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhdGVcU3RhdGVMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [Y:/SEM-6/Advance .NET/Projects/WebApiConsume/WebApiConsume/Views/_ViewImports.cshtml]

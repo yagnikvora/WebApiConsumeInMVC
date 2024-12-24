@@ -1,0 +1,52 @@
+﻿@model WebApiConsume.Models.StateModel
+
+<div class="row">
+
+    <h1 class="col-7">@((Model?.StateID > 0) ? "Edit" : "Add") State</h1>
+    @{
+        if (@TempData["Message"] != null)
+        {
+            <p id="myElement" class="col text-success bg-success-subtle p-2 rounded">@TempData["Message"]</p>
+        }
+    }
+</div>
+<form asp-controller="State" asp-action="SaveState" method="post" onreset="ResetForm()">
+    @Html.HiddenFor(m => m.StateID)
+    <div class="form-group row my-2">
+        <label class="col-2" asp-for="StateName">State Name<span class="text-danger">*</span></label>
+        <input asp-for="StateName" class="form-control col" />
+        <span asp-validation-for="StateName" class="text-danger"></span>
+    </div>
+    <div class="form-group row my-2">
+        <label class="col-2" asp-for="StateCode">State Code<span class="text-danger">*</span></label>
+        <input asp-for="StateCode" class="form-control col" />
+        <span asp-validation-for="StateCode" class="text-danger"></span>
+    </div>
+    <div class="form-group row my-2">
+        <label class="col-2" asp-for="CountryID">Country Name<span class="text-danger">*</span></label>
+        <select class="form-control col" asp-for="CountryID" asp-items="@(new SelectList(ViewBag.CountryList, "CountryID", "CountryName"))">
+            <option value="" selected disabled>Select Country</option>
+        </select>
+        <span asp-validation-for="CountryID" class="text-danger"></span>
+    </div>
+    <div style="margin-left:190px">
+        <button type="submit" class=" btn @((Model?.StateID > 0) ?  "btn-warning" :  "btn-primary")">@((Model?.StateID > 0) ? "Edit" : "Add")</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+        <a class="btn btn-success" asp-controller="State" asp-action="StateList">Back</a>
+    </div>
+</form>
+
+<script>
+    var element = document.getElementById("myElement");
+
+    element.style.display = "block";
+
+    setTimeout(() => {
+        element.style.display = "none";
+    }, 3500);
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

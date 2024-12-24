@@ -1,9 +1,9 @@
 ﻿@using WebApiConsume.Helper
-@model IEnumerable<WebApiConsume.Models.CityModel>
+@model IEnumerable<WebApiConsume.Models.StateModel>
 
 <div class="row">
 
-    <h2 class="col-7">City List</h2>
+    <h2 class="col-7">State List</h2>
     @{
         if (@TempData["Notification"] != null)
         {
@@ -16,14 +16,13 @@
     }
 </div>
 <hr />
-<a class="btn btn-info" asp-controller="City" asp-action="AddEditCity">Add City</a>
+<a class="btn btn-info" asp-controller="State" asp-action="AddEditState">Add State</a>
 <table class="table">
     <thead>
         <tr>
-            <th>City ID</th>
-            <th>City Name</th>
-            <th>City Code</th>
+            <th>State ID</th>
             <th>State Name</th>
+            <th>State Code</th>
             <th>Country Name</th>
             <th colspan="2">Actions</th>
         </tr>
@@ -33,22 +32,23 @@
             foreach (var city in Model)
             {
                 <tr>
-                    <td>@city.CityID</td>
-                    <td>@city.CityName</td>
-                    <td>@city.CityCode</td>
-                    <td>@city.StateName</td>
+                    <td>@city.StateID</td>
+                    <td>
+                        <a asp-controller="City" asp-action="CityList" asp-route-id="@city.StateID">@city.StateName (@city.CityCount)</a>
+                    </td>
+                    <td>@city.StateCode </td>
                     <td>@city.CountryName</td>
                     <td>
-                        <a asp-controller="City" asp-action="AddEditCity" asp-route-id="@UrlEncryptor.Encrypt(city.CityID.ToString())">
+                        <a asp-controller="State" asp-action="AddEditState" asp-route-id="@UrlEncryptor.Encrypt(city.StateID.ToString())">
                             <button type="submit" class="btn btn-warning">
                                 Edit
                             </button>
                         </a>
                     </td>
                     <td>
-                        <form method="post" asp-controller="City" asp-action="CityDelete">
-                            <input type="hidden" name="CityID" value="@UrlEncryptor.Encrypt(city.CityID.ToString())" />
-                            <button onclick=" return confirm('Sure!! Are you want to delete @city.CityName')" type="submit" class="btn btn-danger">
+                        <form method="post" asp-controller="State" asp-action="StateDelete">
+                            <input type="hidden" name="StateID" value="@UrlEncryptor.Encrypt(city.StateID.ToString())" />
+                            <button onclick=" return confirm('Sure!! Are you want to delete @city.StateName')" type="submit" class="btn btn-danger">
                                 Delete
                             </button>
                         </form>
@@ -67,15 +67,3 @@
         element.style.display = "none";
     }, 3500);
 </script>
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $("#citySearch").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#cityTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
-        });
-    </script>
-}
